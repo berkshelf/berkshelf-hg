@@ -1,5 +1,8 @@
 Berkshelf Hg
 ============
+[![Gem Version](https://badge.fury.io/rb/berkshelf-hg.png)](http://badge.fury.io/rb/berkshelf-hg)
+[![Build Status](https://travis-ci.org/berkshelf/berkshelf-hg.png?branch=master)](https://travis-ci.org/berkshelf/berkshelf-hg)
+
 Berkshelf Hg (or Berkshelf Mercurial) is a Berkshelf extension that adds support for downloading cookbooks from Mercurial locations.
 
 Installation
@@ -39,8 +42,8 @@ Usage
 
 License & Authors
 -----------------
-- Author: Seth Vargo <sethvargo@gmail.com>
-- Author: Manuel Ryan <ryan@shamu.ch>
+- Author: Seth Vargo (sethvargo@gmail.com)
+- Author: Manuel Ryan (ryan@shamu.ch)
 
 ```text
 Copyright 2014 Seth Vargo

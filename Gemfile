@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'berkshelf', path: '~/Development/berkshelf'
+gem 'berkshelf', github: 'berkshelf/berkshelf', branch: 'sethvargo/location_extensible'
 
 gemspec
 
