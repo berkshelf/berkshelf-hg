@@ -21,24 +21,24 @@ Or install it yourself as:
 
 Usage
 -----
-1. Activate the extension in your `Berksfile`:
+Activate the extension in your `Berksfile`:
 
-    ```ruby
-    source 'https://api.berkshelf.com'
-    extension 'hg'
-    ```
+```ruby
+source 'https://api.berkshelf.com'
+extension 'hg'
+```
 
-2. Use the exposed `:hg` key to define your sources:
+Use the exposed `:hg` key to define your sources:
 
-    ```ruby
-    cookbook 'bacon', hg: 'https://bitbucket.org/meats/bacon'
-    ```
+```ruby
+cookbook 'bacon', hg: 'https://bitbucket.org/meats/bacon'
+```
 
-  You may also specify a `branch` or `tag`:
+You may also specify a `branch` or `tag`:
 
-    ```ruby
-    cookbook 'bacon', hg: 'https://bitbucket.org/meats/bacon', branch: 'crispy'
-    ```
+```ruby
+cookbook 'bacon', hg: 'https://bitbucket.org/meats/bacon', branch: 'crispy'
+```
 
 License & Authors
 -----------------
