@@ -25,5 +25,13 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
+  # Runtime dependencies
   spec.add_dependency 'berkshelf', '~> 3.0.0.beta'
+
+  # Development dependencies
+  spec.add_development_dependency 'aruba', '~> 0.5'
+  spec.add_development_dependency 'rspec', '~> 2.14'
+
+  spec.add_development_dependency 'bundler'
+  spec.add_development_dependency 'rake'
 end
