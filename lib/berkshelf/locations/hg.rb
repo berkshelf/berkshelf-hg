@@ -1,3 +1,4 @@
+require 'buff/shell_out'
 require 'digest/sha1'
 require 'pathname'
 require 'berkshelf'
@@ -139,9 +140,13 @@ module Berkshelf
         raise HgNotInstalled.new
       end
 
-      out = %x|hg #{command}|
-      raise HgCommandError.new(command, cache_path) if error && !$?.success?
-      out.strip
+      response = Buff::ShellOut.shell_out(%|hg #{command}|)
+
+      if error && !response.success?
+        raise HgCommandError.new(command, cache_path)
+      end
+
+      response.stdout.strip
     end
 
     # Determine if this hg repo has already been downloaded.
