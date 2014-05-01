@@ -26,7 +26,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   # Runtime dependencies
-  spec.add_dependency 'berkshelf', '~> 3.0.0.rc1'
+  spec.add_dependency 'berkshelf', '~> 3.1.0'
 
   # Development dependencies
   spec.add_development_dependency 'aruba', '~> 0.5'
