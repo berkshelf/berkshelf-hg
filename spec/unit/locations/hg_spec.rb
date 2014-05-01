@@ -65,7 +65,7 @@ module Berkshelf
       end
     end
 
-    describe '#download' do
+    describe '#install' do
       before do
         CachedCookbook.stub(:from_store_path)
         FileUtils.stub(:cp_r)
@@ -74,22 +74,27 @@ module Berkshelf
         subject.stub(:hg)
       end
 
-      context 'when the cookbook is already installed' do
-        it 'loads the cookbook from the store' do
-          subject.stub(:installed?).and_return(true)
-          expect(CachedCookbook).to receive(:from_store_path)
-          expect(subject).to receive(:validate_cached!)
-          expect(subject).to_not receive(:hg)
-          subject.download
-        end
-      end
+      # It appears with the change of how the installer works for extensions
+      # that is no longer the responsibilty of the subclass to conditionally
+      # call the install method, as such, I don't believe this test is valid 
+      # any more
+      
+      # context 'when the cookbook is already installed' do
+      #   it 'loads the cookbook from the store' do
+      #     subject.stub(:installed?).and_return(true)
+      #     expect(CachedCookbook).to receive(:from_store_path)
+      #     expect(subject).to receive(:validate_cached!)
+      #     expect(subject).to_not receive(:hg)
+      #     subject.install
+      #   end
+      # end
 
       context 'when the repository is cached' do
         it 'pulls a new version' do
           Dir.stub(:chdir) { |args, &b| b.call } # Force eval the chdir block
           subject.stub(:cached?).and_return(true)
           expect(subject).to receive(:hg).with('pull')
-          subject.download
+          subject.install
         end
       end
 
@@ -97,7 +102,7 @@ module Berkshelf
         it 'clones the repository' do
           subject.stub(:cached?).and_return(false)
           expect(subject).to receive(:hg).with('update --clean --rev defjkl123456')
-          subject.download
+          subject.install
         end
       end
     end
