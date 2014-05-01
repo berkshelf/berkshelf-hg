@@ -44,12 +44,8 @@ module Berkshelf
     # Download the cookbook from the remote hg repository
     #
     # @return [CachedCookbook]
-    def download
-      if installed?
-        cookbook = CachedCookbook.from_store_path(install_path)
-        return super(cookbook)
-      end
-
+    def install
+     
       if cached?
         # Update and checkout the correct ref
         Dir.chdir(cache_path) do
@@ -91,8 +87,10 @@ module Berkshelf
         FileUtils.rm_r(hg_path)
       end
 
-      cookbook = CachedCookbook.from_store_path(install_path)
-      super(cookbook)
+    #  install_path.chmod(0777 & ~File.umask)
+
+#      cookbook = CachedCookbook.from_store_path(install_path)
+#      super(cookbook)
     end
 
     def scm_location?
