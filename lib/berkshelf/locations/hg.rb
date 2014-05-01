@@ -41,6 +41,14 @@ module Berkshelf
       @rel      = options[:rel]
     end
 
+    def cached_cookbook
+      if installed?
+        @cached_cookbook ||= CachedCookbook.from_path(install_path)
+      else
+        nil
+      end
+    end
+    
     # Download the cookbook from the remote hg repository
     #
     # @return [CachedCookbook]
@@ -65,32 +73,37 @@ module Berkshelf
         @revision ||= hg %|id -i|
       end
 
+
       # Gab the path where we should copy from (since it might be relative to
       # the root).
       copy_path = rel ? cache_path.join(rel) : cache_path
 
-      # Validate the thing we are copying is a Chef cookbook
-      validate_cookbook!(copy_path)
+      begin 
+        # Validate the thing we are copying is a Chef cookbook
+        validate_cached!(copy_path)
 
-      # Remove the current cookbook at this location (this is required or else
-      # FileUtils will copy into a subdirectory in the next step)
-      FileUtils.rm_rf(install_path)
+        # Remove the current cookbook at this location (this is required or else
+        # FileUtils will copy into a subdirectory in the next step)
+        FileUtils.rm_rf(install_path)
 
-      # Create the containing parent directory
-      FileUtils.mkdir_p(install_path.parent)
+        # Create the containing parent directory
+        FileUtils.mkdir_p(install_path.parent)
 
-      # Copy whatever is in the current cache over to the store
-      FileUtils.cp_r(copy_path, install_path)
+        # Copy whatever is in the current cache over to the store
+        FileUtils.cp_r(copy_path, install_path)
 
-      # Remove the .hg directory to save storage space
-      if (hg_path = install_path.join('.hg')).exist?
-        FileUtils.rm_r(hg_path)
+
+      ensure
+
+        # Remove the .hg directory to save storage space
+        # TODO this can have huge performance implications, 
+        # make it a config option?
+        if (hg_path = install_path.join('.hg')).exist?
+          FileUtils.rm_r(hg_path)
+        end
+
+       FileUtils.rm_rf (copy_path)
       end
-
-    #  install_path.chmod(0777 & ~File.umask)
-
-#      cookbook = CachedCookbook.from_store_path(install_path)
-#      super(cookbook)
     end
 
     def scm_location?
@@ -125,6 +138,15 @@ module Berkshelf
       out
     end
 
+
+    # Determine if this revision is installed.
+    #
+    # @return [Boolean]
+    def installed?
+      revision && install_path.exist?
+    end
+
+
     private
 
     # Perform a mercurial command.
@@ -155,13 +177,6 @@ module Berkshelf
     # @return [Boolean]
     def cached?
       cache_path.exist?
-    end
-
-    # Determine if this revision is installed.
-    #
-    # @return [Boolean]
-    def installed?
-      revision && install_path.exist?
     end
 
     # The path where this cookbook would live in the store, if it were
