@@ -51,9 +51,8 @@ module Berkshelf
     
     # Download the cookbook from the remote hg repository
     #
-    # @return [CachedCookbook]
+    # @return void
     def install
-     
       if cached?
         # Update and checkout the correct ref
         Dir.chdir(cache_path) do
@@ -73,7 +72,6 @@ module Berkshelf
         @revision ||= hg %|id -i|
       end
 
-
       # Gab the path where we should copy from (since it might be relative to
       # the root).
       copy_path = rel ? cache_path.join(rel) : cache_path
@@ -91,7 +89,6 @@ module Berkshelf
 
         # Copy whatever is in the current cache over to the store
         FileUtils.cp_r(copy_path, install_path)
-
 
       ensure
 
@@ -138,14 +135,12 @@ module Berkshelf
       out
     end
 
-
     # Determine if this revision is installed.
     #
     # @return [Boolean]
     def installed?
       revision && install_path.exist?
     end
-
 
     private
 
