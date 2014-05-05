@@ -16,9 +16,10 @@ module Berkshelf
     end
 
     class HgCommandError < HgError
-      def initialize(command, path = nil)
+      def initialize(command, response, path = nil)
         super "Hg error: command `hg #{command}` failed. If this error " \
-          "persists, try removing the cache directory at `#{path}'."
+          "persists, try removing the cache directory at `#{path}'." \
+          "\nstdout:#{response.stdout}\nstderr:#{response.stderr}"
       end
     end
 
@@ -160,10 +161,10 @@ module Berkshelf
 
       Berkshelf.log.debug("Running:hg #{command}")
       response = Buff::ShellOut.shell_out(%|hg #{command}|)
-      Berkshelf.log.debug("response:hg #{response}")
+      Berkshelf.log.debug("response:hg #{response.stdout}")
 
       if error && !response.success?
-        raise HgCommandError.new(command, cache_path)
+        raise HgCommandError.new(command, response, cache_path)
       end
 
       response.stdout.strip
