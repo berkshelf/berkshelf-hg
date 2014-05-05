@@ -158,7 +158,9 @@ module Berkshelf
         raise HgNotInstalled.new
       end
 
+      Berkshelf.log.debug("Running:hg #{command}")
       response = Buff::ShellOut.shell_out(%|hg #{command}|)
+      Berkshelf.log.debug("response:hg #{response}")
 
       if error && !response.success?
         raise HgCommandError.new(command, cache_path)
