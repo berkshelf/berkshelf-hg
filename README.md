@@ -9,15 +9,21 @@ Installation
 ------------
 Add this line to your application's Gemfile:
 
-    gem 'berkshelf-hg'
+```ruby
+gem 'berkshelf-hg'
+```
 
 And then execute:
 
-    $ bundle
+```sh
+$ bundle
+```
 
 Or install it yourself as:
 
-    $ gem install berkshelf-hg
+```sh
+$ gem install berkshelf-hg
+```
 
 Usage
 -----
