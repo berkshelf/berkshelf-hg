@@ -5,7 +5,7 @@ require 'berkshelf'
 
 module Berkshelf
   class HgLocation < BaseLocation
-    class HgError < BerkshelfError; status_code(500); end
+    class HgError < BerkshelfError; set_status_code(500); end
 
     class HgNotInstalled < HgError
       def initialize
