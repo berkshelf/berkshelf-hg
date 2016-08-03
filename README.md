@@ -1,26 +1,31 @@
-Berkshelf Hg
-============
-[![Gem Version](https://badge.fury.io/rb/berkshelf-hg.png)](http://badge.fury.io/rb/berkshelf-hg)
-[![Build Status](https://travis-ci.org/berkshelf/berkshelf-hg.png?branch=master)](https://travis-ci.org/berkshelf/berkshelf-hg)
+# Berkshelf Hg
+
+[![Gem Version](https://badge.fury.io/rb/berkshelf-hg.svg)](http://badge.fury.io/rb/berkshelf-hg) [![Build Status](https://travis-ci.org/berkshelf/berkshelf-hg.svg?branch=master)](https://travis-ci.org/berkshelf/berkshelf-hg)
 
 Berkshelf Hg (or Berkshelf Mercurial) is a Berkshelf extension that adds support for downloading cookbooks from Mercurial locations.
 
-Installation
-------------
+## Installation
+
 Add this line to your application's Gemfile:
 
-    gem 'berkshelf-hg'
+```
+gem 'berkshelf-hg'
+```
 
 And then execute:
 
-    $ bundle
+```
+$ bundle
+```
 
 Or install it yourself as:
 
-    $ gem install berkshelf-hg
+```
+$ gem install berkshelf-hg
+```
 
-Usage
------
+## Usage
+
 Activate the extension in your `Berksfile`:
 
 ```ruby
@@ -40,8 +45,8 @@ You may also specify a `branch` or `tag`:
 cookbook 'bacon', hg: 'https://bitbucket.org/meats/bacon', branch: 'crispy'
 ```
 
-License & Authors
------------------
+## License & Authors
+
 - Author: Seth Vargo (sethvargo@gmail.com)
 - Author: Manuel Ryan (ryan@shamu.ch)
 
