@@ -14,13 +14,13 @@ gem 'berkshelf-hg'
 
 And then execute:
 
-```
+```sh
 $ bundle
 ```
 
 Or install it yourself as:
 
-```
+```sh
 $ gem install berkshelf-hg
 ```
 
