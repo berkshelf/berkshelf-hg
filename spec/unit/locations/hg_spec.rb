@@ -195,6 +195,7 @@ module Berkshelf
       end
 
       it 'raises an error if the command fails' do
+        Berkshelf.stub(:which).and_return(true)
         subject.stub(:`)
         $?.stub(:success?).and_return(false)
         expect { subject.hg('foo') }.to raise_error(HgLocation::HgCommandError)
