@@ -8,7 +8,7 @@ Berkshelf Hg (or Berkshelf Mercurial) is a Berkshelf extension that adds support
 
 Add this line to your application's Gemfile:
 
-```
+```ruby
 gem 'berkshelf-hg'
 ```
 
