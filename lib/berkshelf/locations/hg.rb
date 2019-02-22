@@ -1,10 +1,12 @@
-require 'buff/shell_out'
 require 'digest/sha1'
 require 'pathname'
 require 'berkshelf'
+require 'berkshelf/shell_out'
 
 module Berkshelf
   class HgLocation < BaseLocation
+    include Berkshelf::ShellOut
+
     class HgError < BerkshelfError; set_status_code(500); end
 
     class HgNotInstalled < HgError
@@ -160,10 +162,10 @@ module Berkshelf
       end
 
       Berkshelf.log.debug("Running:hg #{command}")
-      response = Buff::ShellOut.shell_out(%|hg #{command}|)
+      response = shell_out(%|hg #{command}|)
       Berkshelf.log.debug("response:hg #{response.stdout}")
 
-      if error && !response.success?
+      if response.error?
         raise HgCommandError.new(command, response, cache_path)
       end
 
