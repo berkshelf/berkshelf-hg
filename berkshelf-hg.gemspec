@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'berkshelf', '>= 6.1', '< 8'
 
   # Development dependencies
-  spec.add_development_dependency 'aruba', '~> 0.13'
+  spec.add_development_dependency 'aruba', '~> 1.0'
   spec.add_development_dependency 'rspec', '~> 3.4'
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
